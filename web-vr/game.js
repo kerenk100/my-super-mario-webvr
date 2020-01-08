@@ -7,7 +7,7 @@ const heartEl = document.querySelector('#heartIcon');
 const mario = document.querySelector('#mario'); 
 
 
-const NUM_OF_COINS_TO_COLLECT = 1;
+const NUM_OF_COINS_TO_COLLECT = 15;
 const NUM_OF_PIPES = 10;
 let score = 0;
 
