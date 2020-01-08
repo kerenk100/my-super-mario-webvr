@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>My Super Mario VR Game</title>
+    <meta
+      name="description"
+      content="The nostalgic Super Mario Game... Coming to life in a 3D!"
+    />
+    <link rel="apple-touch-icon" href="mashroom.png" />
+    <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+  </head>
+  <body>
+   
+    <a-scene>
+      <a-camera>
+        <a-entity id="heartIcon" gltf-model="url(../models/heart/Heart.gltf)" position="-0.40 0.5 -0.8" rotation="30 -10 0" scale="0.0005 0.0005 0.0005"></a-entity>
+        <a-text id="score" value="Score" position="-0.35 0.5 -0.8" scale="0.5 0.5 0.5"></a-text>
+        <a-cursor gltf-model="url(../models/mario/Mario.gltf)"></a-cursor>
+      </a-camera>
+      <a-entity environment="preset: forest; dressingAmount: 500"></a-entity>
+      <a-entity id="princess"></a-entity>
+      <a-entity id="pipe" gltf-model="url(../models/pipe/pipe.gltf)" position="0 1 -4" scale="0.1 0.1 0.1"></a-entity>
+      <a-entity laser-controls></a-entity>
+    </a-scene>
+
+    <a-entity id="coin" gltf-model="url(../models/coin/scene.gltf)" position="0 2 -9" rotation="10 90 0" scale="0.1 0.1 0.1"
+      animation="property: rotation; to: 0 360 0; loop: true; easing: linear; dur: 2000"
+      animation__collect="property: position; to: 0 0 0; dur: 300; startEvents: collected"
+      animation__minimize="property: scale; to: 0 0 0; dur: 300; startEvents: collected"></a-entity>
+
+    <script src="game.js"></script>
+
+  </body>
+</html>
