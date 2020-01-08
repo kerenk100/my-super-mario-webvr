@@ -82,6 +82,10 @@ mario.addEventListener('model-loaded', e => {
   loader.load('../models/mariov2/Walking.fbx', obj => {
     animations.walking = mixer.clipAction(obj.animations[0]);
   });
+  loader.load('../models/mariov2/Jump.fbx', obj => {
+    animations.jump = mixer.clipAction(obj.animations[0]);
+    animations.jump.setLoop(THREE.LoopOnce);
+  });
 });
 
 let idleTimeout = null;
@@ -99,6 +103,14 @@ cameraEl.addEventListener('positionChanged', () => {
     }, 200);
   }
 });
+
+// Jump
+document.body.addEventListener('keydown', (e) => {
+  if (e.key === ' ' && animations.jump && !animations.jump.isRunning()) {
+    animations.jump.reset();
+    animations.jump.play();
+  }
+})
 
 for(let i=0 ; i<NUM_OF_COINS_TO_COLLECT; i++){
   createCoin()
