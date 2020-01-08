@@ -5,6 +5,7 @@ const pipeEl = document.querySelector('#pipe');
 const princessEl = document.querySelector('#princess'); 
 const heartEl = document.querySelector('#heartIcon'); 
 const mario = document.querySelector('#mario'); 
+const cameraEl = document.querySelector('a-camera');
 
 
 const NUM_OF_COINS_TO_COLLECT = 15;
@@ -67,6 +68,37 @@ function createPipe(){
   clone.setAttribute("position", randomPositionForPipes());
   sceneEl.appendChild(clone)
 }
+
+// Mario walking animation
+const animations = {};
+
+mario.addEventListener('model-loaded', e => {
+  const { model } = e.detail;
+  const { mixer } = e.target.components['animation-mixer'];
+  animations.static = mixer.clipAction(model.animations[0], model);
+  animations.static.play();
+
+  const loader = new THREE.FBXLoader();
+  loader.load('../models/mariov2/Walking.fbx', obj => {
+    animations.walking = mixer.clipAction(obj.animations[0]);
+  });
+});
+
+let idleTimeout = null;
+cameraEl.addEventListener('positionChanged', () => {
+  if (idleTimeout) {
+    clearTimeout(idleTimeout);
+    idleTimeout = null;
+  }
+
+  if (animations.walking) {
+    animations.walking.play();
+    idleTimeout = setTimeout(() => {
+      animations.walking.stop();
+      idleTimeout = null;
+    }, 200);
+  }
+});
 
 for(let i=0 ; i<NUM_OF_COINS_TO_COLLECT; i++){
   createCoin()

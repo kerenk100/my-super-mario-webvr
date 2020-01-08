@@ -10,14 +10,18 @@
     <link rel="apple-touch-icon" href="mashroom.png" />
     <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.0.1/dist/aframe-extras.min.js"></script>
+    <script src="https://rawgit.com/urish/aframe-camera-events/master/index.js"></script>
+    <script src="inflate.min.js"></script>
   </head>
   <body>
    
     <a-scene>
-      <a-camera>
+      <a-camera position-listener rotation-listener>
         <a-entity id="heartIcon" gltf-model="url(../models/heart/Heart.gltf)" position="-0.40 0.5 -0.8" rotation="30 -10 0" scale="0.0005 0.0005 0.0005"></a-entity>
         <a-text id="score" value="Score" position="-0.35 0.5 -0.8" scale="0.5 0.5 0.5"></a-text>
-        <a-cursor gltf-model="url(../models/mario/Mario.gltf)"></a-cursor>
+        <a-cursor></a-cursor>
+        <a-entity id="mario" fbx-model="src: ../models/mariov2/Mario.fbx" position="-0.40 -1.6 -3" rotation="0 180 0" scale="0.2 0.2 0.2" animation-mixer></a-entity>
       </a-camera>
       <a-entity environment="preset: forest; dressingAmount: 500"></a-entity>
       <a-entity id="princess"></a-entity>
